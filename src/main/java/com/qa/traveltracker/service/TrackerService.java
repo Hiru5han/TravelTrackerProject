@@ -36,8 +36,8 @@ public class TrackerService {
 	}
 
 //update 
-	public TravelTracker update(TravelTracker a, long id) {
-		TravelTracker exists = this.repo.findById(id).orElseThrow();
+	public TravelTracker update(TravelTracker a, long tripname) {
+		TravelTracker exists = this.repo.findById(tripname).orElseThrow();
 		exists.setTravelMethod(a.getTravelMethod());
 		exists.setStartTime(a.getStartTime());
 		exists.setFinishTime(a.getFinishTime());
@@ -48,12 +48,12 @@ public class TrackerService {
 	}
 
 //delete
-	public boolean delete(long id) throws Exception {
-		if (!this.repo.existsById(id)) {
+	public boolean delete(long tripname) throws Exception {
+		if (!this.repo.existsById(tripname)) {
 			throw new Exception();
 		}
-		this.repo.deleteById(id);
-		return !this.repo.existsById(id);
+		this.repo.deleteById(tripname);
+		return !this.repo.existsById(tripname);
 	}
 
 ////Findbyname
