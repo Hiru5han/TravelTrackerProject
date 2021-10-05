@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
-
 @Entity
 public class TravelTracker {
 
@@ -25,10 +24,10 @@ public class TravelTracker {
 	private int finishTime;
 
 	@NotNull(message = "Start destination can not be null")
-	private long startDestination;
+	private String startDestination;
 
 	@NotNull(message = "Finish destination can not be null")
-	private long finishDestination;
+	private String finishDestination;
 
 	// Default constructor
 	public TravelTracker() {
@@ -36,7 +35,7 @@ public class TravelTracker {
 	}
 
 	// For creating
-	public TravelTracker(String travelMethod, int startTime, int finishTime, long startDestination, long finishDestination) {
+	public TravelTracker(String travelMethod, String startDestination, int startTime, String finishDestination, int finishTime) {
 		super();
 		this.travelMethod = travelMethod;
 		this.startTime = startTime;
@@ -47,8 +46,8 @@ public class TravelTracker {
 	}
 
 	// For testing
-	public TravelTracker(long id, String travelMethod, int startTime, int finishTime, long startDestination,
-			long finishDestination) {
+	public TravelTracker(long id, String travelMethod, int startTime, int finishTime, @NotNull(message = "Start destination can not be null") String startDestination,
+			@NotNull(message = "Finish destination can not be null") String finishDestination) {
 		super();
 		this.id = id;
 		this.travelMethod = travelMethod;
@@ -82,25 +81,26 @@ public class TravelTracker {
 		this.finishTime = finishTime;
 	}
 
-	public long getStartDestination() {
+	public String getStartDestination() {
 		return startDestination;
 	}
 
-	public void setStartDestination(long startDestination) {
+	public void setStartDestination(@NotNull(message = "Start destination can not be null") String startDestination) {
 		this.startDestination = startDestination;
 	}
 
-	public long getFinishDestination() {
+	public String getFinishDestination() {
 		return finishDestination;
 	}
 
-	public void setFinishDestination(long finishDestination) {
+	public void setFinishDestination(@NotNull(message = "Finish destination can not be null") String finishDestination) {
 		this.finishDestination = finishDestination;
 	}
 
 	@Override
 	public String toString() {
-		return "You're travelling by " + travelMethod + ", leaving from " + startDestination + " at " + startTime + " and you'll get to " + finishDestination + " at " + finishTime + ". Have a safe trip!";
+		return "You're travelling by " + travelMethod + ", leaving from " + startDestination + " at " + startTime
+				+ " and you'll get to " + finishDestination + " at " + finishTime + ". Have a safe trip!";
 	}
 
 	@Override
@@ -118,6 +118,8 @@ public class TravelTracker {
 			return false;
 		TravelTracker other = (TravelTracker) obj;
 		return Objects.equals(travelMethod, other.travelMethod) && id == other.id && startTime == other.startTime
-				&& Objects.equals(finishTime, other.finishTime) && Objects.equals(startDestination, other.startDestination) && Objects.equals(finishDestination, other.finishDestination);
+				&& Objects.equals(finishTime, other.finishTime)
+				&& Objects.equals(startDestination, other.startDestination)
+				&& Objects.equals(finishDestination, other.finishDestination);
 	}
 }
