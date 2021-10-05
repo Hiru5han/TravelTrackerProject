@@ -25,17 +25,17 @@ public class TrackerServiceUnitTest {
 	@Mock
 	private TravelTrackerRepo repo;
 
-	@Test
-	public void createTest() {​​​
-	TravelTracker input = new TravelTracker("plane", "UK", 0600, "Germany", 1500);
-	TravelTracker output = new TravelTracker(1L, "plane", "UK", 0600, "Germany", 1500);
-	
-	Mockito.when(this.repo.save(input)).thenReturn(output);
-	
-	assertEquals(output, this.service.create(input));
-	
-	Mockito.verify(this.repo, Mockito.times(1)).save(input);
-}​
+//	@Test
+//	public void createTest() {​​​
+//	TravelTracker input = new TravelTracker("plane", "UK", 0600, "Germany", 1500);
+//	TravelTracker output = new TravelTracker(1L, "plane", "UK", 0600, "Germany", 1500);
+//	
+//	Mockito.when(this.repo.save(input)).thenReturn(output);
+//	
+//	assertEquals(output, this.service.create(input));
+//	
+//	Mockito.verify(this.repo, Mockito.times(1)).save(input);
+//}​
 
 	@Test
 	public void readAllTest() {
