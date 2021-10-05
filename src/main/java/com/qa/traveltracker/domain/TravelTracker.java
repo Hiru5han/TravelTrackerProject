@@ -30,7 +30,7 @@ public class TravelTracker {
 	private String finishDestination;
 
 	// Default constructor
-	public TravelTracker() {
+	public TravelTracker(long l, String string, String string2, int i, String string3, int j) {
 		super();
 	}
 

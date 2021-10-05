@@ -38,7 +38,7 @@ public class TrackerService {
 	}
 
 //update 
-	public TravelTracker update(TravelTracker a, long id) {
+	public TravelTracker update(long id, TravelTracker a) {
 		TravelTracker exists = this.repo.findById(id).orElseThrow();
 		exists.setTravelMethod(a.getTravelMethod());
 		exists.setStartTime(a.getStartTime());
