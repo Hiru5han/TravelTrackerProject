@@ -31,8 +31,8 @@ public class TrackerService {
 
 //Read id
 
-	public TravelTracker read(long id) {
-		return this.repo.findById(id).get();
+	public TravelTracker read(long tripname) {
+		return this.repo.findById(tripname).get();
 	}
 
 //update 
