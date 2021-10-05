@@ -3,7 +3,9 @@ package com.qa.traveltracker.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.qa.traveltracker.domain.TravelTracker;
 import com.qa.traveltracker.repo.TravelTrackerRepo;
@@ -31,29 +33,28 @@ public class TrackerService {
 
 //Read id
 
-	public TravelTracker read(long tripname) {
-		return this.repo.findById(tripname).get();
+	public TravelTracker read(long id) {
+		return this.repo.findById(id).get();
 	}
 
 //update 
-	public TravelTracker update(TravelTracker a, long tripname) {
-		TravelTracker exists = this.repo.findById(tripname).orElseThrow();
+	public TravelTracker update(TravelTracker a, long id) {
+		TravelTracker exists = this.repo.findById(id).orElseThrow();
 		exists.setTravelMethod(a.getTravelMethod());
 		exists.setStartTime(a.getStartTime());
 		exists.setFinishTime(a.getFinishTime());
 		exists.setStartDestination(a.getStartDestination());
 		exists.setFinishDestination(a.getFinishDestination());
 		return this.repo.saveAndFlush(exists);
-
 	}
 
 //delete
-	public boolean delete(long tripname) throws Exception {
-		if (!this.repo.existsById(tripname)) {
-			throw new Exception();
+	public boolean delete(long id) {
+		if (!this.repo.existsById(id)) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "object not found");
 		}
-		this.repo.deleteById(tripname);
-		return !this.repo.existsById(tripname);
+		this.repo.deleteById(id);
+		return !this.repo.existsById(id);
 	}
 
 ////Findbyname
