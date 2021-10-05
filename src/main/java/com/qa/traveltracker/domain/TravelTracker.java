@@ -47,10 +47,10 @@ public class TravelTracker {
 	}
 
 	// For testing
-	public TravelTracker(long tripname, String travelMethod, int startTime, int finishTime, long startDestination,
+	public TravelTracker(long id, String travelMethod, int startTime, int finishTime, long startDestination,
 			long finishDestination) {
 		super();
-		this.id = tripname;
+		this.id = id;
 		this.travelMethod = travelMethod;
 		this.startTime = startTime;
 		this.finishTime = finishTime;
