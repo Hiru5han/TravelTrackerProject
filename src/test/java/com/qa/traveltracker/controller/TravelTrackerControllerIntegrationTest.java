@@ -53,7 +53,7 @@ public class TravelTrackerControllerIntegrationTest {
 	
 	@Test
 	public void getAllTest() throws Exception {
-		TravelTracker entry = new TravelTracker(2L, "plane", "UK", 0600, "Germany", 1500);
+		TravelTracker entry = new TravelTracker(1L, "plane", "UK", 0600, "Germany", 1500);
 		List<TravelTracker> output = new ArrayList<>();
 		output.add(entry);
 		String outputAsJSON = this.mapper.writeValueAsString(output);
@@ -66,10 +66,10 @@ public class TravelTrackerControllerIntegrationTest {
 	
 	@Test
 	public void getOneTest() throws Exception {
-		TravelTracker entry = new TravelTracker(2L, "plane", "UK", 0600, "Germany", 1500);
+		TravelTracker entry = new TravelTracker(1L, "plane", "UK", 0600, "Germany", 1500);
 		String entryAsJSON = this.mapper.writeValueAsString(entry);
 		
-		mvc.perform(get("/api/getOne/2")
+		mvc.perform(get("/api/getOne/1")
 			.contentType(MediaType.APPLICATION_JSON))
 			.andExpect(status().isOk())
 			.andExpect(content().json(entryAsJSON));
