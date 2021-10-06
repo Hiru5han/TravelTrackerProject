@@ -17,7 +17,7 @@ import com.qa.traveltracker.domain.TravelTracker;
 import com.qa.traveltracker.service.TrackerService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/traveltracker")
 public class TravelTrackerController {
 
 	private TrackerService service;
@@ -29,19 +29,19 @@ public class TravelTrackerController {
 
 	// CREATE
 	@PostMapping("/create")
-	public ResponseEntity<TravelTracker> createMusic(@RequestBody TravelTracker tracker) {
+	public ResponseEntity<TravelTracker> createTracker(@RequestBody TravelTracker tracker) {
 		return new ResponseEntity<TravelTracker>(this.service.create(tracker), HttpStatus.CREATED);
 	}
 
 	// READ ALL
-	@GetMapping("/getAll")
-	public ResponseEntity<List<TravelTracker>> getAll() {
+	@GetMapping("/readAll")
+	public ResponseEntity<List<TravelTracker>> readAll() {
 		return new ResponseEntity<List<TravelTracker>>(this.service.readAll(), HttpStatus.OK);
 	}
 
 	// READ ONE
-	@GetMapping("/getOne/{id}")
-	public ResponseEntity<TravelTracker> getOne(@PathVariable long id) {
+	@GetMapping("/read/{id}")
+	public ResponseEntity<TravelTracker> read(@PathVariable long id) {
 		return new ResponseEntity<TravelTracker>(this.service.read(id), HttpStatus.OK);
 	}
 
