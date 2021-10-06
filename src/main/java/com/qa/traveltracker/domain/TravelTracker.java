@@ -30,7 +30,7 @@ public class TravelTracker {
 	private String finishDestination;
 
 	// Default constructor
-	public TravelTracker(long l, String string, String string2, int i, String string3, int j) {
+	public TravelTracker() {
 		super();
 	}
 
@@ -46,8 +46,7 @@ public class TravelTracker {
 	}
 
 	// For testing
-	public TravelTracker(long id, String travelMethod, int startTime, int finishTime, @NotNull(message = "Start destination can not be null") String startDestination,
-			@NotNull(message = "Finish destination can not be null") String finishDestination) {
+	public TravelTracker(long id, String travelMethod, @NotNull(message = "Start destination can not be null") String startDestination, int startTime, @NotNull(message = "Finish destination can not be null") String finishDestination, int finishTime) {
 		super();
 		this.id = id;
 		this.travelMethod = travelMethod;

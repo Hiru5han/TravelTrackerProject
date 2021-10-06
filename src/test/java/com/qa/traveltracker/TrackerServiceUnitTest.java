@@ -1,6 +1,9 @@
 package com.qa.traveltracker;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -25,22 +28,22 @@ public class TrackerServiceUnitTest {
 	@Mock
 	private TravelTrackerRepo repo;
 
-//	@Test
-//	public void createTest() {​​​
-//	TravelTracker input = new TravelTracker("plane", "UK", 0600, "Germany", 1500);
-//	TravelTracker output = new TravelTracker(1L, "plane", "UK", 0600, "Germany", 1500);
-//	
-//	Mockito.when(this.repo.save(input)).thenReturn(output);
-//	
-//	assertEquals(output, this.service.create(input));
-//	
-//	Mockito.verify(this.repo, Mockito.times(1)).save(input);
-//}​
-
+	@Test
+	public void createTest() {
+	TravelTracker input = new TravelTracker("plane", "UK", 0600, "Germany", 1500);
+	TravelTracker output = new TravelTracker(1L, "plane", "UK", 0600, "Germany", 1500);
+	
+	Mockito.when(this.repo.save(input)).thenReturn(output);
+	
+	assertEquals(output, this.service.create(input));
+	
+	Mockito.verify(this.repo, Mockito.times(1)).save(input);
+	}
+	
 	@Test
 	public void readAllTest() {
 		List<TravelTracker> output = new ArrayList<>();
-		output.add(new TravelTracker("plane", "uk", 0600, "germany", 1500));
+		output.add(new TravelTracker("plane", "UK", 0600, "Germany", 1500));
 
 		Mockito.when(this.repo.findAll()).thenReturn(output);
 
@@ -64,16 +67,38 @@ public class TrackerServiceUnitTest {
 
 	@Test
 	public void updateTest() {
-		TravelTracker input = new TravelTracker("plane", "UK", 0600, "Germany", 1500);
+		TravelTracker input = new TravelTracker("plane", "France", 1800, "Germany", 1900);
 		Optional<TravelTracker> existing = Optional.of(new TravelTracker(1L, "plane", "UK", 0600, "Germany", 1500));
 		TravelTracker output = new TravelTracker(1L, "plane", "France", 1800, "Germany", 1900);
 
 		Mockito.when(this.repo.findById(1L)).thenReturn(existing);
 		Mockito.when(this.repo.saveAndFlush(output)).thenReturn(output);
 
-		assertEquals(output, this.service.update(1L, input));
-
+		assertEquals(output, this.service.update(input, 1L));
 		Mockito.verify(this.repo, Mockito.times(1)).findById(1L);
 		Mockito.verify(this.repo, Mockito.times(1)).saveAndFlush(output);
 	}
+
+	@Test
+	public void deleteTrueTest() {
+		Mockito.when(this.repo.existsById(1L)).thenReturn(false);
+
+		assertTrue(this.service.delete(1L));
+
+		Mockito.verify(this.repo, Mockito.times(1)).deleteById(1L);
+		Mockito.verify(this.repo, Mockito.times(1)).existsById(1L);
+	}
+
+	@Test
+	public void deleteFalseTest() {
+		Mockito.when(this.repo.existsById(1L)).thenReturn(true);
+
+		assertFalse(this.service.delete(1L));
+
+		Mockito.verify(this.repo, Mockito.times(1)).deleteById(1L);
+		Mockito.verify(this.repo, Mockito.times(1)).existsById(1L);
+	}
+	
+	
+
 }
