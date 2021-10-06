@@ -22,7 +22,7 @@ public class TrackerService {
 
 //create 
 	public TravelTracker create(TravelTracker a) {
-		return this.repo.saveAndFlush(a);
+		return this.repo.save(a);
 	}
 
 //ReadAll
@@ -50,15 +50,12 @@ public class TrackerService {
 
 //delete
 	public boolean delete(long id) {
-		if (!this.repo.existsById(id)) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "object not found");
-		}
 		this.repo.deleteById(id);
 		return !this.repo.existsById(id);
 	}
 
 ////Findbyname
-//	public List<Animals> findByName(String name) {
+//	public List<TravelTracker> findByName(String name) {
 //		return this.repo.findByname(name);
-}
 //}
+}
