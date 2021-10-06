@@ -1,0 +1,1 @@
+INSERT INTO `traveltracker` (`travelMethod`, `startDestination`, `startTime`, `finishDestination`, `finishTime`) VALUES ('Plane', 'UK', 0600, 'Germany', 2000);
