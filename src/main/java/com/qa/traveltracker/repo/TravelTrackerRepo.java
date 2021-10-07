@@ -11,6 +11,6 @@ import com.qa.traveltracker.domain.TravelTracker;
 @Repository
 public interface TravelTrackerRepo extends JpaRepository<TravelTracker, Long> {
 	@Query(value = "SELECT * FROM TravelTracker Where first_name = ?1", nativeQuery = true)
-	List<TravelTracker>findByname(String name);
+	List<TravelTracker>findByid(Long id);
 
 }

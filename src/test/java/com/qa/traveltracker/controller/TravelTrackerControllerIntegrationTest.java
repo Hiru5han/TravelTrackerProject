@@ -12,22 +12,25 @@ import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qa.traveltracker.domain.TravelTracker;
-import com.qa.traveltracker.service.TrackerService;
-
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest
-public class TravelTrackerControllerUnitTest {
+@SpringBootTest
+@AutoConfigureMockMvc
+@Sql(scripts = { "classpath:testschema.sql",
+		"classpath:testdata.sql" }, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+@ActiveProfiles("test")
+public class TravelTrackerControllerIntegrationTest {
 
 	@Autowired
 	private MockMvc mvc;
@@ -35,28 +38,23 @@ public class TravelTrackerControllerUnitTest {
 	@Autowired
 	private ObjectMapper mapper;
 
-	@MockBean
-	private TrackerService service;
-
 	@Test
 	public void createTest() throws Exception {
 		TravelTracker entry = new TravelTracker("plane", "UK", 1300, "Germany", 2000);
+		TravelTracker result = new TravelTracker(2L, "plane", "UK", 1300, "Germany", 2000);
 		String entryAsJSON = this.mapper.writeValueAsString(entry);
-
-		Mockito.when(this.service.create(entry)).thenReturn(entry);
+		String resultAsJSON = this.mapper.writeValueAsString(result);
 
 		mvc.perform(post("/traveltracker/create").contentType(MediaType.APPLICATION_JSON).content(entryAsJSON))
-				.andExpect(status().isCreated()).andExpect(content().json(entryAsJSON));
+				.andExpect(status().isCreated()).andExpect(content().json(resultAsJSON));
 	}
 
 	@Test
 	public void readAllTest() throws Exception {
-		TravelTracker entry = new TravelTracker("plane", "UK", 1300, "Germany", 2000);
+		TravelTracker entry = new TravelTracker(1L, "Plane", "UK", 1300, "Germany", 2000);
 		List<TravelTracker> output = new ArrayList<>();
 		output.add(entry);
 		String outputAsJSON = this.mapper.writeValueAsString(output);
-
-		Mockito.when(this.service.readAll()).thenReturn(output);
 
 		mvc.perform(get("/traveltracker/readAll").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
 				.andExpect(content().json(outputAsJSON));
@@ -64,10 +62,8 @@ public class TravelTrackerControllerUnitTest {
 
 	@Test
 	public void readTest() throws Exception {
-		TravelTracker entry = new TravelTracker("plane", "UK", 1300, "Germany", 2000);
+		TravelTracker entry = new TravelTracker(1L, "Plane", "UK", 1300, "Germany", 2000);
 		String entryAsJSON = this.mapper.writeValueAsString(entry);
-
-		Mockito.when(this.service.read(1L)).thenReturn(entry);
 
 		mvc.perform(get("/traveltracker/read/1").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
 				.andExpect(content().json(entryAsJSON));
@@ -75,26 +71,18 @@ public class TravelTrackerControllerUnitTest {
 
 	@Test
 	public void deleteSuccessTest() throws Exception {
-		Mockito.when(this.service.delete(1L)).thenReturn(true);
-
-		mvc.perform(delete("/traveltracker/remove/1").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isNoContent());
-	}
-
-	@Test
-	public void deleteFailTest() throws Exception {
-		Mockito.when(this.service.delete(1L)).thenReturn(false);
-
-		mvc.perform(delete("/traveltracker/remove/1").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isNotFound());
+		mvc.perform(delete("/traveltracker/remove/1").contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isNoContent());
 	}
 
 	@Test
 	public void updateTest() throws Exception {
 		TravelTracker entry = new TravelTracker("plane", "UK", 1300, "Germany", 2000);
 		String entryAsJSON = this.mapper.writeValueAsString(entry);
-
-		Mockito.when(this.service.update(entry, 1L)).thenReturn(entry);
+		TravelTracker result = new TravelTracker(1L, "plane", "UK", 1300, "Germany", 2000);
+		String resultAsJSON = this.mapper.writeValueAsString(result);
 
 		mvc.perform(put("/traveltracker/update/1").contentType(MediaType.APPLICATION_JSON).content(entryAsJSON))
-				.andExpect(status().isAccepted()).andExpect(content().json(entryAsJSON));
+				.andExpect(status().isAccepted()).andExpect(content().json(resultAsJSON));
 	}
 }

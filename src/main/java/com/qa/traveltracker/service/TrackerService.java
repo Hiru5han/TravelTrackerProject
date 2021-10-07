@@ -3,10 +3,7 @@ package com.qa.traveltracker.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
-
 import com.qa.traveltracker.domain.TravelTracker;
 import com.qa.traveltracker.repo.TravelTrackerRepo;
 
@@ -55,7 +52,7 @@ public class TrackerService {
 	}
 
 ////Findbyname
-//	public List<TravelTracker> findByName(String name) {
-//		return this.repo.findByname(name);
+//	public List<TravelTracker> findByid(long id) {
+//		return this.repo.findByid(id);
 //}
 }
