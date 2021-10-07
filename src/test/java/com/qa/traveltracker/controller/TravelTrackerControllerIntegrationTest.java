@@ -40,8 +40,8 @@ public class TravelTrackerControllerIntegrationTest {
 
 	@Test
 	public void createTest() throws Exception {
-		TravelTracker entry = new TravelTracker("plane", "UK", 0600, "Germany", 1500);
-		TravelTracker result = new TravelTracker(2L, "plane", "UK", 0600, "Germany", 1500);
+		TravelTracker entry = new TravelTracker("plane", "UK", 1300, "Germany", 2000);
+		TravelTracker result = new TravelTracker(2L, "plane", "UK", 1300, "Germany", 2000);
 		String entryAsJSON = this.mapper.writeValueAsString(entry);
 		String resultAsJSON = this.mapper.writeValueAsString(result);
 
@@ -51,7 +51,7 @@ public class TravelTrackerControllerIntegrationTest {
 
 	@Test
 	public void readAllTest() throws Exception {
-		TravelTracker entry = new TravelTracker(1L, "plane", "UK", 0600, "Germany", 1500);
+		TravelTracker entry = new TravelTracker(1L, "Plane", "UK", 1300, "Germany", 2000);
 		List<TravelTracker> output = new ArrayList<>();
 		output.add(entry);
 		String outputAsJSON = this.mapper.writeValueAsString(output);
@@ -62,7 +62,7 @@ public class TravelTrackerControllerIntegrationTest {
 
 	@Test
 	public void readTest() throws Exception {
-		TravelTracker entry = new TravelTracker(1L, "plane", "UK", 0600, "Germany", 1500);
+		TravelTracker entry = new TravelTracker(1L, "Plane", "UK", 1300, "Germany", 2000);
 		String entryAsJSON = this.mapper.writeValueAsString(entry);
 
 		mvc.perform(get("/traveltracker/read/1").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
@@ -77,9 +77,9 @@ public class TravelTrackerControllerIntegrationTest {
 
 	@Test
 	public void updateTest() throws Exception {
-		TravelTracker entry = new TravelTracker("plane", "UK", 0600, "Germany", 1500);
+		TravelTracker entry = new TravelTracker("plane", "UK", 1300, "Germany", 2000);
 		String entryAsJSON = this.mapper.writeValueAsString(entry);
-		TravelTracker result = new TravelTracker(1L, "plane", "UK", 0600, "Germany", 1500);
+		TravelTracker result = new TravelTracker(1L, "plane", "UK", 1300, "Germany", 2000);
 		String resultAsJSON = this.mapper.writeValueAsString(result);
 
 		mvc.perform(put("/traveltracker/update/1").contentType(MediaType.APPLICATION_JSON).content(entryAsJSON))

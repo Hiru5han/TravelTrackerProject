@@ -1,1 +1,1 @@
-INSERT INTO `TRAVEL_TRACKER` (`travelMethod`, `startDestination`, `startTime`, `finishDestination`, `finishTime`) VALUES ('Plane', 'UK', 0600, 'Germany', 2000);
+INSERT INTO `travel_tracker` (`travel_method`, `start_destination`, `start_time`, `finish_destination`, `finish_time`) VALUES ('Plane', 'UK', 1300, 'Germany', 2000);

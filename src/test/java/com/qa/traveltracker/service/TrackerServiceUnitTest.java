@@ -17,7 +17,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import com.qa.traveltracker.domain.TravelTracker;
 import com.qa.traveltracker.repo.TravelTrackerRepo;
-import com.qa.traveltracker.service.TrackerService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TrackerServiceUnitTest {
@@ -30,20 +29,20 @@ public class TrackerServiceUnitTest {
 
 	@Test
 	public void createTest() {
-	TravelTracker input = new TravelTracker("plane", "UK", 0600, "Germany", 1500);
-	TravelTracker output = new TravelTracker(1L, "plane", "UK", 0600, "Germany", 1500);
-	
-	Mockito.when(this.repo.save(input)).thenReturn(output);
-	
-	assertEquals(output, this.service.create(input));
-	
-	Mockito.verify(this.repo, Mockito.times(1)).save(input);
+		TravelTracker input = new TravelTracker("plane", "UK", 1300, "Germany", 2000);
+		TravelTracker output = new TravelTracker(1L, "plane", "UK", 1300, "Germany", 2000);
+
+		Mockito.when(this.repo.save(input)).thenReturn(output);
+
+		assertEquals(output, this.service.create(input));
+
+		Mockito.verify(this.repo, Mockito.times(1)).save(input);
 	}
-	
+
 	@Test
 	public void readAllTest() {
 		List<TravelTracker> output = new ArrayList<>();
-		output.add(new TravelTracker("plane", "UK", 0600, "Germany", 1500));
+		output.add(new TravelTracker("plane", "UK", 1300, "Germany", 2000));
 
 		Mockito.when(this.repo.findAll()).thenReturn(output);
 
@@ -55,8 +54,8 @@ public class TrackerServiceUnitTest {
 	@Test
 	public void readOneTest() {
 		Optional<TravelTracker> OptionalOutput = Optional
-				.of(new TravelTracker(1L, "plane", "UK", 0600, "Germany", 1500));
-		TravelTracker output = new TravelTracker(1L, "plane", "UK", 0600, "Germany", 1500);
+				.of(new TravelTracker(1L, "plane", "UK", 1300, "Germany", 2000));
+		TravelTracker output = new TravelTracker(1L, "plane", "UK", 1300, "Germany", 2000);
 
 		Mockito.when(this.repo.findById(1L)).thenReturn(OptionalOutput);
 
@@ -67,9 +66,9 @@ public class TrackerServiceUnitTest {
 
 	@Test
 	public void updateTest() {
-		TravelTracker input = new TravelTracker("plane", "France", 1800, "Germany", 1900);
-		Optional<TravelTracker> existing = Optional.of(new TravelTracker(1L, "plane", "UK", 0600, "Germany", 1500));
-		TravelTracker output = new TravelTracker(1L, "plane", "France", 1800, "Germany", 1900);
+		TravelTracker input = new TravelTracker("plane", "France", 1300, "Germany", 2000);
+		Optional<TravelTracker> existing = Optional.of(new TravelTracker(1L, "plane", "UK", 1300, "Germany", 2000));
+		TravelTracker output = new TravelTracker(1L, "plane", "France", 1300, "Germany", 2000);
 
 		Mockito.when(this.repo.findById(1L)).thenReturn(existing);
 		Mockito.when(this.repo.saveAndFlush(output)).thenReturn(output);
@@ -98,7 +97,5 @@ public class TrackerServiceUnitTest {
 		Mockito.verify(this.repo, Mockito.times(1)).deleteById(1L);
 		Mockito.verify(this.repo, Mockito.times(1)).existsById(1L);
 	}
-	
-	
 
 }

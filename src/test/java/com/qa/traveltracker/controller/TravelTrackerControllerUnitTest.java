@@ -40,7 +40,7 @@ public class TravelTrackerControllerUnitTest {
 
 	@Test
 	public void createTest() throws Exception {
-		TravelTracker entry = new TravelTracker("plane", "UK", 0600, "Germany", 1500);
+		TravelTracker entry = new TravelTracker("plane", "UK", 1300, "Germany", 2000);
 		String entryAsJSON = this.mapper.writeValueAsString(entry);
 
 		Mockito.when(this.service.create(entry)).thenReturn(entry);
@@ -50,8 +50,8 @@ public class TravelTrackerControllerUnitTest {
 	}
 
 	@Test
-	public void getAllTest() throws Exception {
-		TravelTracker entry = new TravelTracker("plane", "UK", 0600, "Germany", 1500);
+	public void readAllTest() throws Exception {
+		TravelTracker entry = new TravelTracker("plane", "UK", 1300, "Germany", 2000);
 		List<TravelTracker> output = new ArrayList<>();
 		output.add(entry);
 		String outputAsJSON = this.mapper.writeValueAsString(output);
@@ -63,8 +63,8 @@ public class TravelTrackerControllerUnitTest {
 	}
 
 	@Test
-	public void getOneTest() throws Exception {
-		TravelTracker entry = new TravelTracker("plane", "UK", 0600, "Germany", 1500);
+	public void readTest() throws Exception {
+		TravelTracker entry = new TravelTracker("plane", "UK", 1300, "Germany", 2000);
 		String entryAsJSON = this.mapper.writeValueAsString(entry);
 
 		Mockito.when(this.service.read(1L)).thenReturn(entry);
@@ -89,7 +89,7 @@ public class TravelTrackerControllerUnitTest {
 
 	@Test
 	public void updateTest() throws Exception {
-		TravelTracker entry = new TravelTracker("plane", "UK", 0600, "Germany", 1500);
+		TravelTracker entry = new TravelTracker("plane", "UK", 1300, "Germany", 2000);
 		String entryAsJSON = this.mapper.writeValueAsString(entry);
 
 		Mockito.when(this.service.update(entry, 1L)).thenReturn(entry);

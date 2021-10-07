@@ -1,1 +1,0 @@
-CREATE TABLE IF NOT EXISTS traveltracker (id integer auto_increment, travelMethod varchar(255) not null, startDestination varchar(255) not null, startTime integer not null, finishDestination varchar(255) not null, finishTime integer not null, primary key (id));

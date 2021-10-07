@@ -46,7 +46,7 @@ public class TravelTracker {
 	}
 
 	// For testing
-	public TravelTracker(long id, String travelMethod, @NotNull(message = "Start destination can not be null") String startDestination, int startTime, @NotNull(message = "Finish destination can not be null") String finishDestination, int finishTime) {
+	public TravelTracker(long id, String travelMethod, String startDestination, int startTime, String finishDestination, int finishTime) {
 		super();
 		this.id = id;
 		this.travelMethod = travelMethod;
@@ -84,7 +84,7 @@ public class TravelTracker {
 		return startDestination;
 	}
 
-	public void setStartDestination(@NotNull(message = "Start destination can not be null") String startDestination) {
+	public void setStartDestination(String startDestination) {
 		this.startDestination = startDestination;
 	}
 
@@ -92,7 +92,7 @@ public class TravelTracker {
 		return finishDestination;
 	}
 
-	public void setFinishDestination(@NotNull(message = "Finish destination can not be null") String finishDestination) {
+	public void setFinishDestination(String finishDestination) {
 		this.finishDestination = finishDestination;
 	}
 
