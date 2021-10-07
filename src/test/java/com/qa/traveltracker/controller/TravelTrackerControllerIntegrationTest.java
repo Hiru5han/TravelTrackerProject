@@ -27,72 +27,62 @@ import com.qa.traveltracker.domain.TravelTracker;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-@Sql(scripts = {"classpath:testschema.sql", "classpath:testdata.sql"}, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+@Sql(scripts = { "classpath:testschema.sql",
+		"classpath:testdata.sql" }, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 @ActiveProfiles("test")
 public class TravelTrackerControllerIntegrationTest {
-	
+
 	@Autowired
 	private MockMvc mvc;
-	
+
 	@Autowired
 	private ObjectMapper mapper;
-	
+
 	@Test
 	public void createTest() throws Exception {
 		TravelTracker entry = new TravelTracker("plane", "UK", 0600, "Germany", 1500);
 		TravelTracker result = new TravelTracker(2L, "plane", "UK", 0600, "Germany", 1500);
 		String entryAsJSON = this.mapper.writeValueAsString(entry);
 		String resultAsJSON = this.mapper.writeValueAsString(result);
-		
-		mvc.perform(post("/traveltracker/create")
-				.contentType(MediaType.APPLICATION_JSON)
-				.content(entryAsJSON))
-				.andExpect(status().isCreated())
-				.andExpect(content().json(resultAsJSON));	
+
+		mvc.perform(post("/traveltracker/create").contentType(MediaType.APPLICATION_JSON).content(entryAsJSON))
+				.andExpect(status().isCreated()).andExpect(content().json(resultAsJSON));
 	}
-//	
-//	@Test
-//	public void readAllTest() throws Exception {
-//		TravelTracker entry = new TravelTracker(1L, "plane", "UK", 0600, "Germany", 1500);
-//		List<TravelTracker> output = new ArrayList<>();
-//		output.add(entry);
-//		String outputAsJSON = this.mapper.writeValueAsString(output);
-//		
-//		mvc.perform(get("/traveltracker/readAll")
-//				.contentType(MediaType.APPLICATION_JSON))
-//				.andExpect(status().isOk())
-//				.andExpect(content().json(outputAsJSON));
-//	}
-//	
-//	@Test
-//	public void readTest() throws Exception {
-//		TravelTracker entry = new TravelTracker(1L, "plane", "UK", 0600, "Germany", 1500);
-//		String entryAsJSON = this.mapper.writeValueAsString(entry);
-//		
-//		mvc.perform(get("/traveltracker/read/1")
-//			.contentType(MediaType.APPLICATION_JSON))
-//			.andExpect(status().isOk())
-//			.andExpect(content().json(entryAsJSON));
-//	}
-//	
-//	@Test
-//	public void deleteSuccessTest() throws Exception {
-//		mvc.perform(delete("/traveltracker/remove/1")
-//			.contentType(MediaType.APPLICATION_JSON))
-//			.andExpect(status().isNoContent());
-//	}
-//	
-//	@Test
-//	public void updateTest() throws Exception {
-//		TravelTracker entry = new TravelTracker("plane", "UK", 0600, "Germany", 1500);
-//		String entryAsJSON = this.mapper.writeValueAsString(entry);
-//		TravelTracker result = new TravelTracker(1L, "plane", "UK", 0600, "Germany", 1500);
-//		String resultAsJSON = this.mapper.writeValueAsString(result);
-//		
-//		mvc.perform(put("/traveltracker/update/1")
-//			.contentType(MediaType.APPLICATION_JSON)
-//			.content(entryAsJSON))
-//			.andExpect(status().isAccepted())
-//			.andExpect(content().json(resultAsJSON));
-//	}
+
+	@Test
+	public void readAllTest() throws Exception {
+		TravelTracker entry = new TravelTracker(1L, "plane", "UK", 0600, "Germany", 1500);
+		List<TravelTracker> output = new ArrayList<>();
+		output.add(entry);
+		String outputAsJSON = this.mapper.writeValueAsString(output);
+
+		mvc.perform(get("/traveltracker/readAll").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+				.andExpect(content().json(outputAsJSON));
+	}
+
+	@Test
+	public void readTest() throws Exception {
+		TravelTracker entry = new TravelTracker(1L, "plane", "UK", 0600, "Germany", 1500);
+		String entryAsJSON = this.mapper.writeValueAsString(entry);
+
+		mvc.perform(get("/traveltracker/read/1").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+				.andExpect(content().json(entryAsJSON));
+	}
+
+	@Test
+	public void deleteSuccessTest() throws Exception {
+		mvc.perform(delete("/traveltracker/remove/1").contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isNoContent());
+	}
+
+	@Test
+	public void updateTest() throws Exception {
+		TravelTracker entry = new TravelTracker("plane", "UK", 0600, "Germany", 1500);
+		String entryAsJSON = this.mapper.writeValueAsString(entry);
+		TravelTracker result = new TravelTracker(1L, "plane", "UK", 0600, "Germany", 1500);
+		String resultAsJSON = this.mapper.writeValueAsString(result);
+
+		mvc.perform(put("/traveltracker/update/1").contentType(MediaType.APPLICATION_JSON).content(entryAsJSON))
+				.andExpect(status().isAccepted()).andExpect(content().json(resultAsJSON));
+	}
 }

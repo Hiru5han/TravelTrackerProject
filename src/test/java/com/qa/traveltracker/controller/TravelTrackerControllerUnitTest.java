@@ -58,7 +58,7 @@ public class TravelTrackerControllerUnitTest {
 
 		Mockito.when(this.service.readAll()).thenReturn(output);
 
-		mvc.perform(get("/traveltracker/getAll").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+		mvc.perform(get("/traveltracker/readAll").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
 				.andExpect(content().json(outputAsJSON));
 	}
 
@@ -69,7 +69,7 @@ public class TravelTrackerControllerUnitTest {
 
 		Mockito.when(this.service.read(1L)).thenReturn(entry);
 
-		mvc.perform(get("/traveltracker/getOne/1").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+		mvc.perform(get("/traveltracker/read/1").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
 				.andExpect(content().json(entryAsJSON));
 	}
 
