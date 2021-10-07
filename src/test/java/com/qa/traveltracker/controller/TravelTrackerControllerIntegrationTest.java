@@ -50,19 +50,19 @@ public class TravelTrackerControllerIntegrationTest {
 				.andExpect(status().isCreated())
 				.andExpect(content().json(resultAsJSON));	
 	}
-	
-	@Test
-	public void readAllTest() throws Exception {
-		TravelTracker entry = new TravelTracker(1L, "plane", "UK", 0600, "Germany", 1500);
-		List<TravelTracker> output = new ArrayList<>();
-		output.add(entry);
-		String outputAsJSON = this.mapper.writeValueAsString(output);
-		
-		mvc.perform(get("/traveltracker/readAll")
-				.contentType(MediaType.APPLICATION_JSON))
-				.andExpect(status().isOk())
-				.andExpect(content().json(outputAsJSON));
-	}
+//	
+//	@Test
+//	public void readAllTest() throws Exception {
+//		TravelTracker entry = new TravelTracker(1L, "plane", "UK", 0600, "Germany", 1500);
+//		List<TravelTracker> output = new ArrayList<>();
+//		output.add(entry);
+//		String outputAsJSON = this.mapper.writeValueAsString(output);
+//		
+//		mvc.perform(get("/traveltracker/readAll")
+//				.contentType(MediaType.APPLICATION_JSON))
+//				.andExpect(status().isOk())
+//				.andExpect(content().json(outputAsJSON));
+//	}
 //	
 //	@Test
 //	public void readTest() throws Exception {

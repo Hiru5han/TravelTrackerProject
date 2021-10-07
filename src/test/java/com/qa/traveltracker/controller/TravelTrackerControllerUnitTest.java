@@ -45,7 +45,7 @@ public class TravelTrackerControllerUnitTest {
 
 		Mockito.when(this.service.create(entry)).thenReturn(entry);
 
-		mvc.perform(post("/api/create").contentType(MediaType.APPLICATION_JSON).content(entryAsJSON))
+		mvc.perform(post("/traveltracker/create").contentType(MediaType.APPLICATION_JSON).content(entryAsJSON))
 				.andExpect(status().isCreated()).andExpect(content().json(entryAsJSON));
 	}
 
@@ -58,7 +58,7 @@ public class TravelTrackerControllerUnitTest {
 
 		Mockito.when(this.service.readAll()).thenReturn(output);
 
-		mvc.perform(get("/api/getAll").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+		mvc.perform(get("/traveltracker/getAll").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
 				.andExpect(content().json(outputAsJSON));
 	}
 
@@ -69,7 +69,7 @@ public class TravelTrackerControllerUnitTest {
 
 		Mockito.when(this.service.read(1L)).thenReturn(entry);
 
-		mvc.perform(get("/api/getOne/1").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+		mvc.perform(get("/traveltracker/getOne/1").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
 				.andExpect(content().json(entryAsJSON));
 	}
 
@@ -77,14 +77,14 @@ public class TravelTrackerControllerUnitTest {
 	public void deleteSuccessTest() throws Exception {
 		Mockito.when(this.service.delete(1L)).thenReturn(true);
 
-		mvc.perform(delete("/api/remove/1").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isNoContent());
+		mvc.perform(delete("/traveltracker/remove/1").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isNoContent());
 	}
 
 	@Test
 	public void deleteFailTest() throws Exception {
 		Mockito.when(this.service.delete(1L)).thenReturn(false);
 
-		mvc.perform(delete("/api/remove/1").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isNotFound());
+		mvc.perform(delete("/traveltracker/remove/1").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isNotFound());
 	}
 
 	@Test
@@ -94,7 +94,7 @@ public class TravelTrackerControllerUnitTest {
 
 		Mockito.when(this.service.update(entry, 1L)).thenReturn(entry);
 
-		mvc.perform(put("/api/update/1").contentType(MediaType.APPLICATION_JSON).content(entryAsJSON))
+		mvc.perform(put("/traveltracker/update/1").contentType(MediaType.APPLICATION_JSON).content(entryAsJSON))
 				.andExpect(status().isAccepted()).andExpect(content().json(entryAsJSON));
 	}
 }
