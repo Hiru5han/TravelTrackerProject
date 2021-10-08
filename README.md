@@ -1,7 +1,7 @@
 # Travel Tracker Project
 
 **Why are we doing this?** 
-To consolidate all that we have learnt and put them into practise. 
+To consolidate all that we have learnt and put them into practice. 
 I have chosen to make a travel tracker as I feel that it is something that I would use when travelling.
 
 **How I expected the challenge to go:** 
