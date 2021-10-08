@@ -50,9 +50,4 @@ public class TrackerService {
 		this.repo.deleteById(id);
 		return !this.repo.existsById(id);
 	}
-
-////Findbyname
-//	public List<TravelTracker> findByid(long id) {
-//		return this.repo.findByid(id);
-//}
 }

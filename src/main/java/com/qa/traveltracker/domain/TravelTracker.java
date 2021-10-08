@@ -96,17 +96,17 @@ public class TravelTracker {
 		this.finishDestination = finishDestination;
 	}
 
-	@Override
-	public String toString() {
-		return "You're travelling by " + travelMethod + ", leaving from " + startDestination + " at " + startTime
-				+ " and you'll get to " + finishDestination + " at " + finishTime + ". Have a safe trip!";
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(id, travelMethod, startTime, finishTime, startDestination, finishDestination);
-	}
-
+//	@Override
+//	public String toString() {
+//		return "You're travelling by " + travelMethod + ", leaving from " + startDestination + " at " + startTime
+//				+ " and you'll get to " + finishDestination + " at " + finishTime + ". Have a safe trip!";
+//	}
+//
+//	@Override
+//	public int hashCode() {
+//		return Objects.hash(id, travelMethod, startTime, finishTime, startDestination, finishDestination);
+//	}
+//
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
